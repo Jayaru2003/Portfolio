@@ -29,10 +29,6 @@ COPY --from=build /app/target/*.jar app.jar
 # Expose port (Railway will override this with PORT env variable)
 EXPOSE 8080
 
-# Run the application
-# Use exec form to properly handle signals
-ENTRYPOINT ["java", "-jar", "app.jar"]
-
-# Optional: Add health check
-HEALTHCHECK --interval=30s --timeout=3s --start-period=30s --retries=3 \
-    CMD curl -f http://localhost:8080/actuator/health || exit 1
+# Run the application with PORT support
+ENV PORT=8080
+ENTRYPOINT ["sh", "-c", "java -Dserver.port=${PORT} -jar app.jar"]
