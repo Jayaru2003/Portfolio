@@ -1,6 +1,7 @@
 # Deployment Guide: Portfolio Application
 
 This guide walks you through deploying your portfolio application with:
+
 - **Backend**: Railway (Spring Boot + PostgreSQL)
 - **Frontend**: Vercel (Static HTML/CSS/JS)
 
@@ -46,6 +47,7 @@ SPRING_PROFILES_ACTIVE=prod
 ```
 
 **Important Notes:**
+
 - `DATABASE_URL` is automatically provided by Railway's PostgreSQL
 - Generate a secure `JWT_SECRET` (32+ characters)
 - `CORS_ORIGIN` will be updated after Vercel deployment
@@ -72,9 +74,10 @@ You'll need this for the frontend configuration.
 Before deploying, update `frontend/js/config.js`:
 
 ```javascript
-const API_BASE_URL = window.location.hostname === 'localhost' 
-    ? 'http://localhost:8080/api'
-    : 'https://your-portfolio-backend.railway.app/api'; // Use your Railway URL
+const API_BASE_URL =
+  window.location.hostname === "localhost"
+    ? "http://localhost:8080/api"
+    : "https://your-portfolio-backend.railway.app/api"; // Use your Railway URL
 
 export default API_BASE_URL;
 ```
@@ -130,14 +133,14 @@ After deployment, Vercel provides a URL like: `https://your-portfolio.vercel.app
 
 ### Railway (Backend)
 
-| Variable | Description | Example |
-|----------|-------------|---------|
-| `DATABASE_URL` | PostgreSQL connection string | Auto-set by Railway |
-| `PORT` | Server port | `8080` |
-| `JWT_SECRET` | Secret key for JWT tokens | `your-32-char-secret-key` |
-| `CORS_ORIGIN` | Allowed frontend origins | `https://your-portfolio.vercel.app` |
-| `H2_CONSOLE_ENABLED` | Disable H2 console in production | `false` |
-| `SPRING_PROFILES_ACTIVE` | Spring profile | `prod` |
+| Variable                 | Description                      | Example                             |
+| ------------------------ | -------------------------------- | ----------------------------------- |
+| `DATABASE_URL`           | PostgreSQL connection string     | Auto-set by Railway                 |
+| `PORT`                   | Server port                      | `8080`                              |
+| `JWT_SECRET`             | Secret key for JWT tokens        | `your-32-char-secret-key`           |
+| `CORS_ORIGIN`            | Allowed frontend origins         | `https://your-portfolio.vercel.app` |
+| `H2_CONSOLE_ENABLED`     | Disable H2 console in production | `false`                             |
+| `SPRING_PROFILES_ACTIVE` | Spring profile                   | `prod`                              |
 
 ### Vercel (Frontend)
 
@@ -150,31 +153,37 @@ No environment variables needed. API URL is configured in `config.js`.
 ### Backend Issues
 
 **Build fails on Railway:**
+
 - Check Railway build logs
 - Ensure `pom.xml` has correct dependencies
 - Verify `nixpacks.toml` configuration
 
 **Database connection errors:**
+
 - Verify `DATABASE_URL` is set correctly
 - Check PostgreSQL service is running in Railway
 
 **JWT errors:**
+
 - Ensure `JWT_SECRET` is at least 32 characters
 - Check application.properties has correct configuration
 
 ### Frontend Issues
 
 **API calls fail (CORS errors):**
+
 - Verify `CORS_ORIGIN` in Railway matches your Vercel URL exactly
 - Check browser console for specific CORS errors
 - Ensure Railway backend is redeployed after CORS update
 
 **Profile/Projects not loading:**
+
 - Check `config.js` has correct Railway backend URL
 - Open browser DevTools → Network tab to see API call status
 - Verify backend health endpoint is accessible
 
 **Admin login fails:**
+
 - Check JWT_SECRET is set in Railway
 - Verify backend logs for authentication errors
 - Test login endpoint directly: `POST https://your-backend.railway.app/api/auth/login`
@@ -203,11 +212,13 @@ To continue local development:
 ## Updating Your Deployment
 
 ### Update Backend:
+
 1. Make code changes
 2. Commit and push to GitHub
 3. Railway auto-deploys from GitHub
 
 ### Update Frontend:
+
 1. Make code changes
 2. Commit and push to GitHub
 3. Vercel auto-deploys from GitHub
@@ -218,7 +229,7 @@ To continue local development:
 
 - ✅ JWT_SECRET is at least 32 characters (256 bits)
 - ✅ H2 console is disabled in production
-- ✅ CORS is restricted to specific origin (not *)
+- ✅ CORS is restricted to specific origin (not \*)
 - ✅ PostgreSQL is used in production (not H2)
 - ✅ All sensitive data in environment variables (not hardcoded)
 - ✅ HTTPS is used for all communication
@@ -239,6 +250,7 @@ To continue local development:
 ## Support
 
 If you encounter issues:
+
 - Railway Docs: [docs.railway.app](https://docs.railway.app)
 - Vercel Docs: [vercel.com/docs](https://vercel.com/docs)
 - Spring Boot Docs: [spring.io/guides](https://spring.io/guides)
@@ -248,6 +260,7 @@ If you encounter issues:
 **Deployment Complete!** 🎉
 
 Your portfolio is now live:
+
 - Frontend: `https://your-portfolio.vercel.app`
 - Backend API: `https://your-portfolio-backend.railway.app/api`
 - Admin Panel: `https://your-portfolio.vercel.app/admin.html`
