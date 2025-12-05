@@ -89,6 +89,7 @@
     </dependencies>
 
     <build>
+        <finalName>portfolio-backend-1.0.0</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
