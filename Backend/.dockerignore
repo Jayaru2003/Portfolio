@@ -21,14 +21,29 @@ Thumbs.db
 *.log
 logs/
 
-# Environment files
+# Test coverage
+.coverage
+htmlcov/
+
+# Environment files (these should use Railway env vars)
 .env
 .env.local
 
-# Test files
-TestHash.java
+# Documentation that's not needed in container
+*.md
+!README.md
+
+# Frontend files (not needed for backend container)
+frontend/
+
+# Other build tools
+.gradle/
+build/
 
 # Temporary files
 *.tmp
 *.swp
 *~
+
+# Node modules if any
+node_modules/
