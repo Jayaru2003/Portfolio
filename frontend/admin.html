@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <!-- Login Screen -->
+    <div class="login-container" id="loginContainer">
+        <div class="login-box">
+            <div class="login-header">
+                <i class="fas fa-lock"></i>
+                <h2>Admin Login</h2>
+                <p>Enter your credentials to access the admin panel</p>
+            </div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="username" placeholder="Username" required>
+                </div>
+                <div class="form-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="password" placeholder="Password" required>
+                </div>
+                <button type="submit" class="btn-login">
+                    <span>Login</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+                <div id="loginMessage" class="message"></div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div class="admin-container" id="adminContainer">
+        <!-- Header -->
+        <header class="admin-header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-user-shield"></i>
+                    <h1>Admin Dashboard</h1>
+                </div>
+                <div class="user-info">
+                    <span id="adminUsername">Admin</span>
+                    <button class="btn-logout" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <div class="tabs-container">
+            <button class="tab active" onclick="switchTab('profile')">
+                <i class="fas fa-user"></i> Profile & About
+            </button>
+            <button class="tab" onclick="switchTab('projects')">
+                <i class="fas fa-briefcase"></i> Manage Projects
+            </button>
+            <button class="tab" onclick="switchTab('messages')">
+                <i class="fas fa-envelope"></i> Messages
+                <span class="badge" id="messageCount">0</span>
+            </button>
+            <button class="tab" onclick="switchTab('stats')">
+                <i class="fas fa-chart-bar"></i> Statistics
+            </button>
+        </div>
+
+        <!-- Profile Section -->
+        <div class="tab-content active" id="profileTab">
+            <div class="section-header">
+                <h2><i class="fas fa-user"></i> Edit Profile & About</h2>
+                <button class="btn-primary" onclick="saveProfile()">
+                    <i class="fas fa-save"></i> Save Changes
+                </button>
+            </div>
+
+            <div class="card">
+                <form id="profileForm">
+                    <input type="hidden" id="profileId">
+                    
+                    <div class="form-section">
+                        <h3><i class="fas fa-id-card"></i> Personal Information</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Full Name *</label>
+                                <input type="text" id="fullName" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Title/Position *</label>
+                                <input type="text" id="profileTitle" placeholder="e.g., Full Stack Developer" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Bio/Tagline *</label>
+                            <textarea id="bio" rows="2" placeholder="Short bio for hero section" required></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3><i class="fas fa-image"></i> Images & Files</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Profile Image URL *</label>
+                                <input type="url" id="profileImageUrl" placeholder="https://example.com/image.jpg" required>
+                            </div>
+                            <div class="form-group">
+                                <label>CV/Resume URL</label>
+                                <input type="url" id="cvUrl" placeholder="https://example.com/cv.pdf">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3><i class="fas fa-info-circle"></i> About Section</h3>
+                        <div class="form-group">
+                            <label>About Description *</label>
+                            <textarea id="aboutDescription" rows="6" placeholder="Detailed description for about section" required></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3><i class="fas fa-chart-line"></i> Statistics</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Years Experience</label>
+                                <input type="number" id="yearsExperience" min="0" placeholder="5">
+                            </div>
+                            <div class="form-group">
+                                <label>Projects Completed</label>
+                                <input type="number" id="projectsCompleted" min="0" placeholder="50">
+                            </div>
+                            <div class="form-group">
+                                <label>Happy Clients</label>
+                                <input type="number" id="happyClients" min="0" placeholder="30">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3><i class="fas fa-link"></i> Social Links & Contact</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Email Address</label>
+                                <input type="email" id="emailAddress" placeholder="john@example.com">
+                            </div>
+                            <div class="form-group">
+                                <label>Phone Number</label>
+                                <input type="tel" id="phoneNumber" placeholder="+1 234 567 8900">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>GitHub URL</label>
+                                <input type="url" id="githubUrl" placeholder="https://github.com/username">
+                            </div>
+                            <div class="form-group">
+                                <label>LinkedIn URL</label>
+                                <input type="url" id="linkedinUrl" placeholder="https://linkedin.com/in/username">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Twitter URL</label>
+                            <input type="url" id="twitterUrl" placeholder="https://twitter.com/username">
+                        </div>
+                    </div>
+
+                    <div id="profileMessage" class="message"></div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Projects Section -->
+        <div class="tab-content" id="projectsTab">
+            <div class="section-header">
+                <h2><i class="fas fa-briefcase"></i> Manage Projects</h2>
+                <button class="btn-primary" onclick="showAddProject()">
+                    <i class="fas fa-plus"></i> Add New Project
+                </button>
+            </div>
+
+            <!-- Add/Edit Project Form -->
+            <div class="card form-card" id="projectFormCard" style="display: none;">
+                <div class="card-header">
+                    <h3 id="formTitle">Add New Project</h3>
+                    <button class="btn-close" onclick="hideProjectForm()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <form id="projectForm">
+                    <input type="hidden" id="projectId">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Project Title *</label>
+                            <input type="text" id="projectTitle" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Description *</label>
+                        <textarea id="projectDescription" rows="4" required></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Image URL</label>
+                            <input type="url" id="projectImage" placeholder="https://example.com/image.jpg">
+                        </div>
+                        <div class="form-group">
+                            <label>Demo URL</label>
+                            <input type="url" id="projectDemo" placeholder="https://demo.example.com">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>GitHub URL</label>
+                            <input type="url" id="projectGithub" placeholder="https://github.com/user/repo">
+                        </div>
+                        <div class="form-group">
+                            <label>Tech Stack</label>
+                            <input type="text" id="projectTech" placeholder="Java, Spring Boot, React">
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-save"></i> Save Project
+                        </button>
+                        <button type="button" class="btn-secondary" onclick="hideProjectForm()">
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Projects List -->
+            <div class="projects-list" id="projectsList">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>Loading projects...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Messages Section -->
+        <div class="tab-content" id="messagesTab">
+            <div class="section-header">
+                <h2><i class="fas fa-envelope"></i> Contact Messages</h2>
+            </div>
+            <div class="messages-list" id="messagesList">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>Loading messages...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Statistics Section -->
+        <div class="tab-content" id="statsTab">
+            <div class="section-header">
+                <h2><i class="fas fa-chart-bar"></i> Portfolio Statistics</h2>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="totalProjects">0</h3>
+                        <p>Total Projects</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="totalMessages">0</h3>
+                        <p>Total Messages</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>N/A</h3>
+                        <p>Portfolio Views</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #43e97b, #38f9d7);">
+                        <i class="fas fa-calendar"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="todayDate">-</h3>
+                        <p>Last Updated</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 30px;">
+                <h3><i class="fas fa-info-circle"></i> Quick Info</h3>
+                <div class="info-list">
+                    <div class="info-item">
+                        <i class="fas fa-server"></i>
+                        <span>Backend API: <strong>http://localhost:8080/api</strong></span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-database"></i>
+                        <span>Database: <strong>H2 In-Memory</strong></span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-code"></i>
+                        <span>Framework: <strong>Spring Boot 3.2.0</strong></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/admin.js"></script>
+</body>
+</html>
