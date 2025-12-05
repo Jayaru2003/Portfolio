@@ -5,7 +5,8 @@
   },
   "deploy": {
     "startCommand": "java -jar target/portfolio-backend-1.0.0.jar",
-    "healthcheckPath": "/api/projects",
+    "healthcheckPath": "/actuator/health",
+    "healthcheckTimeout": 300,
     "restartPolicyType": "ON_FAILURE"
   }
 }
