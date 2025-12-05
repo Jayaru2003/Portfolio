@@ -1,5 +1,5 @@
-// API Configuration
-const API_BASE_URL = 'http://localhost:8080/api';
+// Import API Configuration
+import API_BASE_URL from './config.js';
 
 // State Management
 let currentEditId = null;
