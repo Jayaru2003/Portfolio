@@ -2,7 +2,7 @@
 nixPkgs = ["maven", "jdk17"]
 
 [phases.build]
-cmds = ["mvn clean install -DskipTests"]
+cmds = ["mvn clean package -DskipTests"]
 
 [phases.start]
-cmd = "java -Dserver.port=$PORT -jar target/portfolio-backend-1.0.0.jar"
+cmd = "java -Dserver.port=$PORT -jar target/*.jar"
