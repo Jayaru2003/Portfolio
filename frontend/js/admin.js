@@ -153,26 +153,35 @@ async function saveProfile() {
     const messageDiv = document.getElementById('profileMessage');
     const profileId = document.getElementById('profileId').value;
     
+    // Get numeric values properly - allow 0 but convert empty to 0
+    const yearsExp = document.getElementById('yearsExperience').value;
+    const projectsComp = document.getElementById('projectsCompleted').value;
+    const happyCli = document.getElementById('happyClients').value;
+    
     const profileData = {
-        fullName: document.getElementById('fullName').value,
-        title: document.getElementById('profileTitle').value,
-        bio: document.getElementById('bio').value,
-        aboutDescription: document.getElementById('aboutDescription').value,
-        profileImageUrl: document.getElementById('profileImageUrl').value,
-        cvUrl: document.getElementById('cvUrl').value,
-        githubUrl: document.getElementById('githubUrl').value,
-        linkedinUrl: document.getElementById('linkedinUrl').value,
-        twitterUrl: document.getElementById('twitterUrl').value,
-        emailAddress: document.getElementById('emailAddress').value,
-        phoneNumber: document.getElementById('phoneNumber').value,
-        yearsExperience: parseInt(document.getElementById('yearsExperience').value) || 0,
-        projectsCompleted: parseInt(document.getElementById('projectsCompleted').value) || 0,
-        happyClients: parseInt(document.getElementById('happyClients').value) || 0
+        fullName: document.getElementById('fullName').value.trim(),
+        title: document.getElementById('profileTitle').value.trim(),
+        bio: document.getElementById('bio').value.trim(),
+        aboutDescription: document.getElementById('aboutDescription').value.trim(),
+        profileImageUrl: document.getElementById('profileImageUrl').value.trim(),
+        cvUrl: document.getElementById('cvUrl').value.trim(),
+        githubUrl: document.getElementById('githubUrl').value.trim(),
+        linkedinUrl: document.getElementById('linkedinUrl').value.trim(),
+        twitterUrl: document.getElementById('twitterUrl').value.trim(),
+        emailAddress: document.getElementById('emailAddress').value.trim(),
+        phoneNumber: document.getElementById('phoneNumber').value.trim(),
+        yearsExperience: yearsExp === '' ? 0 : parseInt(yearsExp),
+        projectsCompleted: projectsComp === '' ? 0 : parseInt(projectsComp),
+        happyClients: happyCli === '' ? 0 : parseInt(happyCli)
     };
 
+    console.log('Saving profile data:', profileData);
+    
     try {
         const url = profileId ? `${API_BASE_URL}/profile/${profileId}` : `${API_BASE_URL}/profile`;
         const method = profileId ? 'PUT' : 'POST';
+        
+        console.log(`${method} request to:`, url);
         
         const response = await fetch(url, {
             method: method,
@@ -183,21 +192,26 @@ async function saveProfile() {
             body: JSON.stringify(profileData)
         });
 
+        console.log('Response status:', response.status);
+
         if (response.ok) {
             const saved = await response.json();
+            console.log('Saved profile:', saved);
             document.getElementById('profileId').value = saved.id;
-            showMessage(messageDiv, 'Profile updated successfully!', 'success');
+            showMessage(messageDiv, 'Profile updated successfully! ✓', 'success');
             
-            // Reload the main portfolio page if open
+            // Reload profile to show updated data
             setTimeout(() => {
-                window.opener?.location.reload();
+                loadProfile();
             }, 1000);
         } else {
-            showMessage(messageDiv, 'Failed to save profile', 'error');
+            const errorText = await response.text();
+            console.error('Save failed:', errorText);
+            showMessage(messageDiv, `Failed to save profile: ${response.status}`, 'error');
         }
     } catch (error) {
         console.error('Error saving profile:', error);
-        showMessage(messageDiv, 'Error saving profile', 'error');
+        showMessage(messageDiv, `Error: ${error.message}. Check if backend is running at ${API_BASE_URL}`, 'error');
     }
 }
 
@@ -462,5 +476,14 @@ function showNotification(message, type) {
         setTimeout(() => notification.remove(), 300);
     }, 3000);
 }
+
+// Expose functions to global scope for onclick handlers
+window.logout = logout;
+window.switchTab = switchTab;
+window.saveProfile = saveProfile;
+window.showAddProject = showAddProject;
+window.hideProjectForm = hideProjectForm;
+window.editProject = editProject;
+window.deleteProject = deleteProject;
 
 console.log('Admin panel loaded successfully! 🚀');

@@ -189,15 +189,57 @@ function updateProfileUI(profile) {
     const socialLinks = document.querySelectorAll('.social-links a');
     if (profile.githubUrl && socialLinks[0]) {
         socialLinks[0].href = profile.githubUrl;
+        socialLinks[0].target = '_blank';
     }
     if (profile.linkedinUrl && socialLinks[1]) {
         socialLinks[1].href = profile.linkedinUrl;
+        socialLinks[1].target = '_blank';
     }
     if (profile.twitterUrl && socialLinks[2]) {
         socialLinks[2].href = profile.twitterUrl;
+        socialLinks[2].target = '_blank';
     }
     if (profile.emailAddress && socialLinks[3]) {
         socialLinks[3].href = `mailto:${profile.emailAddress}`;
+    }
+    
+    // Update contact section email and phone
+    const contactDetails = document.querySelectorAll('.contact-details');
+    if (contactDetails.length >= 3) {
+        // Email (second contact-item)
+        if (profile.emailAddress && contactDetails[1]) {
+            const emailP = contactDetails[1].querySelector('p');
+            if (emailP) emailP.textContent = profile.emailAddress;
+        }
+        // Phone (third contact-item)
+        if (profile.phoneNumber && contactDetails[2]) {
+            const phoneP = contactDetails[2].querySelector('p');
+            if (phoneP) phoneP.textContent = profile.phoneNumber;
+        }
+    }
+    
+    // Update contact section social links
+    const contactSocialLinks = document.querySelectorAll('.contact-social a');
+    if (profile.githubUrl && contactSocialLinks[0]) {
+        contactSocialLinks[0].href = profile.githubUrl;
+        contactSocialLinks[0].target = '_blank';
+        contactSocialLinks[0].rel = 'noopener noreferrer';
+    }
+    if (profile.linkedinUrl && contactSocialLinks[1]) {
+        contactSocialLinks[1].href = profile.linkedinUrl;
+        contactSocialLinks[1].target = '_blank';
+        contactSocialLinks[1].rel = 'noopener noreferrer';
+    }
+    if (profile.twitterUrl && contactSocialLinks[2]) {
+        contactSocialLinks[2].href = profile.twitterUrl;
+        contactSocialLinks[2].target = '_blank';
+        contactSocialLinks[2].rel = 'noopener noreferrer';
+    }
+    // Instagram link (4th social link) - use Twitter if no separate Instagram field
+    if (profile.twitterUrl && contactSocialLinks[3]) {
+        contactSocialLinks[3].href = profile.twitterUrl;
+        contactSocialLinks[3].target = '_blank';
+        contactSocialLinks[3].rel = 'noopener noreferrer';
     }
     
     // Update stats in about section
