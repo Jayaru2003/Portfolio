@@ -43,7 +43,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        
+
         // Split and add each origin
         String[] origins = allowedOrigins.split(",");
         for (String origin : origins) {
@@ -56,7 +56,7 @@ public class SecurityConfig {
                 configuration.addAllowedOrigin(origin);
             }
         }
-        
+
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
         configuration.setAllowCredentials(true);
