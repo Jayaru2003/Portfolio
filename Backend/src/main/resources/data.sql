@@ -17,6 +17,6 @@ VALUES ('John Doe', 'Full Stack Developer', 'Passionate developer creating amazi
         'I am a dedicated full-stack developer with expertise in modern web technologies. I specialize in building scalable, user-friendly applications that solve real-world problems. My passion lies in clean code, innovative solutions, and continuous learning.',
         'https://drive.google.com/uc?export=view&id=1HxgkuFVpBgx2U_Ckny0C4mXCAu2EG6SM', 'https://example.com/cv.pdf',
         'https://github.com/johndoe', 'https://linkedin.com/in/johndoe', 'https://twitter.com/johndoe',
-        'john.doe@example.com', '+1 234 567 8900',
+        'jayarumanilka@gmail.com', '+94706796634',
         5, 50, 30, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
