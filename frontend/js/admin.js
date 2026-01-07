@@ -147,6 +147,20 @@ function populateProfileForm(profile) {
     document.getElementById('yearsExperience').value = profile.yearsExperience || '';
     document.getElementById('projectsCompleted').value = profile.projectsCompleted || '';
     document.getElementById('happyClients').value = profile.happyClients || '';
+    
+    // Show image preview if URL exists
+    const previewDiv = document.getElementById('imagePreview');
+    if (profile.profileImageUrl) {
+        // If URL starts with /api/, prepend the base URL
+        let imageUrl = profile.profileImageUrl;
+        if (imageUrl.startsWith('/api/')) {
+            imageUrl = API_BASE_URL.replace('/api', '') + imageUrl;
+        }
+        previewDiv.innerHTML = `<img src="${imageUrl}" alt="Profile Preview">`;
+        previewDiv.classList.add('show');
+    } else {
+        previewDiv.classList.remove('show');
+    }
 }
 
 async function saveProfile() {
@@ -477,6 +491,69 @@ function showNotification(message, type) {
     }, 3000);
 }
 
+// ===== Image Upload Handler =====
+async function handleImageUpload(input) {
+    const file = input.files[0];
+    if (!file) return;
+
+    // Validate file type
+    if (!file.type.startsWith('image/')) {
+        alert('Please select an image file');
+        input.value = '';
+        return;
+    }
+
+    // Validate file size (5MB)
+    if (file.size > 5 * 1024 * 1024) {
+        alert('Image size must be less than 5MB');
+        input.value = '';
+        return;
+    }
+
+    // Show loading state
+    const previewDiv = document.getElementById('imagePreview');
+    const urlInput = document.getElementById('profileImageUrl');
+    previewDiv.innerHTML = '<p style="color: var(--primary); padding: 10px;">Uploading image...</p>';
+    previewDiv.classList.add('show');
+
+    try {
+        // Create FormData
+        const formData = new FormData();
+        formData.append('file', file);
+
+        // Upload to backend
+        const response = await fetch(`${API_BASE_URL}/upload/image`, {
+            method: 'POST',
+            body: formData
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            
+            // Store only the relative URL path (e.g., /api/upload/images/abc.jpg)
+            urlInput.value = data.url;
+            
+            // Construct full URL for preview display only
+            const fullImageUrl = API_BASE_URL.replace('/api', '') + data.url;
+            
+            // Show preview
+            previewDiv.innerHTML = `<img src="${fullImageUrl}" alt="Profile Preview">`;
+            previewDiv.classList.add('show');
+            
+            console.log('Image uploaded successfully. Saved URL:', data.url);
+            showNotification('Profile image uploaded successfully!', 'success');
+        } else {
+            const error = await response.json();
+            alert('Upload failed: ' + (error.error || 'Unknown error'));
+            previewDiv.classList.remove('show');
+        }
+    } catch (error) {
+        console.error('Upload error:', error);
+        alert('Failed to upload image. Please try again.');
+        previewDiv.classList.remove('show');
+    }
+}
+
 // Expose functions to global scope for onclick handlers
 window.logout = logout;
 window.switchTab = switchTab;
@@ -485,5 +562,6 @@ window.showAddProject = showAddProject;
 window.hideProjectForm = hideProjectForm;
 window.editProject = editProject;
 window.deleteProject = deleteProject;
+window.handleImageUpload = handleImageUpload;
 
 console.log('Admin panel loaded successfully! 🚀');

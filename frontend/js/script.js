@@ -176,7 +176,15 @@ function updateProfileUI(profile) {
     // Update profile image
     if (profile.profileImageUrl) {
         const profileImg = document.querySelector('.profile-img img');
-        if (profileImg) profileImg.src = profile.profileImageUrl;
+        if (profileImg) {
+            // If URL starts with /api/, it's a relative path - construct full URL
+            if (profile.profileImageUrl.startsWith('/api/')) {
+                profileImg.src = API_BASE_URL.replace('/api', '') + profile.profileImageUrl;
+            } else {
+                // Otherwise it's already a full URL (external image or old data)
+                profileImg.src = profile.profileImageUrl;
+            }
+        }
     }
     
     // Update CV link
