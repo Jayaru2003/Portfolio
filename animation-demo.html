@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GSAP Animation Examples - Jayaru Manilka</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 800px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+        }
+        .demo-box {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            margin: 20px auto;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .demo-box:hover {
+            transform: scale(1.05);
+        }
+        .btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 10px 5px;
+            transition: all 0.3s;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .info {
+            background: #f0f0f0;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        code {
+            background: #e0e0e0;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+        .status {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background: #4caf50;
+            color: white;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+        a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+    
+    <!-- GSAP Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>🎬 GSAP Animation Test</h1>
+        
+        <div class="status">
+            ✅ Your Portfolio is Ready with GSAP Animations!
+        </div>
+        
+        <div class="info">
+            <h3>Portfolio Owner: Jayaru Manilka</h3>
+            <p><strong>GSAP Version:</strong> 3.12.5</p>
+            <p><strong>Status:</strong> Fully Configured</p>
+            <p><strong>Animations:</strong> 15+ Professional Animations</p>
+        </div>
+        
+        <h2>Try These Animation Demos:</h2>
+        
+        <div class="demo-box" id="box1">Click Me!</div>
+        
+        <div style="text-align: center;">
+            <button class="btn" onclick="animateBounce()">🎪 Bounce</button>
+            <button class="btn" onclick="animateRotate()">🔄 Rotate</button>
+            <button class="btn" onclick="animateScale()">📏 Scale</button>
+            <button class="btn" onclick="animateFade()">👻 Fade</button>
+            <button class="btn" onclick="animateSlide()">➡️ Slide</button>
+        </div>
+        
+        <div class="info" style="margin-top: 30px;">
+            <h3>📚 What You Have:</h3>
+            <ul style="line-height: 2;">
+                <li>✨ Hero section animations (title, description, buttons)</li>
+                <li>🔄 Continuous floating card animations</li>
+                <li>📜 Scroll-triggered section animations</li>
+                <li>⬆️ Staggered element appearances</li>
+                <li>🌊 Parallax scrolling effects</li>
+                <li>🎯 Smooth scroll navigation</li>
+            </ul>
+        </div>
+        
+        <div class="info">
+            <h3>🚀 View Your Portfolio:</h3>
+            <p>1. Double-click: <code>start-portfolio.bat</code></p>
+            <p>2. Or run: <code>python -m http.server 8000</code></p>
+            <p>3. Open: <a href="http://localhost:8000" target="_blank">http://localhost:8000</a></p>
+        </div>
+        
+        <div class="info">
+            <h3>📝 Edit Your Content:</h3>
+            <p>Open <code>js/data.js</code> and update:</p>
+            <ul style="margin-left: 20px; margin-top: 10px;">
+                <li>Your projects</li>
+                <li>Skills and technologies</li>
+                <li>Contact information</li>
+                <li>Social media links</li>
+            </ul>
+        </div>
+        
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="index.html" class="btn">🌟 View Full Portfolio</a>
+        </div>
+        
+        <p style="text-align: center; margin-top: 20px; color: #666;">
+            Made with 💜 by Jayaru Manilka using GSAP
+        </p>
+    </div>
+    
+    <script>
+        // Demo Animations
+        const box = document.getElementById('box1');
+        
+        // Initial animation
+        gsap.from(box, {
+            duration: 1,
+            scale: 0,
+            rotation: 360,
+            ease: 'back.out(1.7)'
+        });
+        
+        function animateBounce() {
+            gsap.to(box, {
+                duration: 0.5,
+                y: -50,
+                ease: 'bounce.out',
+                yoyo: true,
+                repeat: 1
+            });
+        }
+        
+        function animateRotate() {
+            gsap.to(box, {
+                duration: 1,
+                rotation: '+=360',
+                ease: 'power2.inOut'
+            });
+        }
+        
+        function animateScale() {
+            gsap.to(box, {
+                duration: 0.5,
+                scale: 1.5,
+                ease: 'elastic.out(1, 0.3)',
+                yoyo: true,
+                repeat: 1
+            });
+        }
+        
+        function animateFade() {
+            gsap.to(box, {
+                duration: 0.5,
+                opacity: 0,
+                ease: 'power2.inOut',
+                yoyo: true,
+                repeat: 1
+            });
+        }
+        
+        function animateSlide() {
+            gsap.to(box, {
+                duration: 0.8,
+                x: 200,
+                ease: 'power3.inOut',
+                yoyo: true,
+                repeat: 1
+            });
+        }
+        
+        // Click animation
+        box.addEventListener('click', () => {
+            gsap.to(box, {
+                duration: 0.3,
+                scale: 1.2,
+                rotation: '+=180',
+                ease: 'back.out(2)',
+                yoyo: true,
+                repeat: 1
+            });
+        });
+        
+        console.log('🎬 GSAP Animation Demo Ready!');
+        console.log('✨ Portfolio Owner: Jayaru Manilka');
+    </script>
+</body>
+</html>

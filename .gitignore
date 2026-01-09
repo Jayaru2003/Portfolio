@@ -1,0 +1,55 @@
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+
+# Build outputs
+dist/
+build/
+.cache/
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Old backend files (not needed anymore)
+Backend/
+backend/
+src/main/
+target/
+pom.xml
+*.jar
+*.class
+
+# Old deployment files
+DEPLOYMENT_GUIDE.md
+IMAGE_UPLOAD_GUIDE.md
+RAILWAY_SETUP.md
+Dockerfile
+railway.json
+start-frontend.bat
+
+# Temporary files
+*.tmp
+*.bak
