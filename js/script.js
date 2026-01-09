@@ -32,12 +32,19 @@ function initGSAPAnimations() {
     });
 
     gsap.from('.hero-buttons .btn', {
-        duration: 0.8,
+        duration: 0.6,
         y: 20,
         opacity: 0,
-        stagger: 0.2,
+        stagger: 0.15,
         ease: 'power3.out',
-        delay: 0.8
+        delay: 0.8,
+        onComplete: function() {
+            const buttons = document.querySelectorAll('.hero-buttons .btn');
+            buttons.forEach(btn => {
+                btn.style.opacity = '1';
+                btn.style.visibility = 'visible';
+            });
+        }
     });
 
     gsap.from('.social-links .social-link', {
@@ -118,20 +125,6 @@ function initGSAPAnimations() {
         },
         duration: 0.8,
         y: 50,
-        opacity: 0,
-        stagger: 0.2,
-        ease: 'power3.out'
-    });
-
-    // Animate skill categories
-    gsap.from('.skill-category', {
-        scrollTrigger: {
-            trigger: '.skills-grid',
-            start: 'top 70%',
-            toggleActions: 'play none none reverse'
-        },
-        duration: 0.8,
-        y: 80,
         opacity: 0,
         stagger: 0.2,
         ease: 'power3.out'
@@ -367,7 +360,14 @@ function loadProfile() {
             const imageUrl = profile.profileImageUrl.includes('?') 
                 ? `${profile.profileImageUrl}&t=${Date.now()}`
                 : `${profile.profileImageUrl}?t=${Date.now()}`;
-            profileImg.src = imageUrl;
+            
+            // Preload image before showing to prevent flash
+            const tempImg = new Image();
+            tempImg.onload = function() {
+                profileImg.src = imageUrl;
+                profileImg.style.opacity = '1';
+            };
+            tempImg.src = imageUrl;
         }
     }
     
@@ -444,68 +444,6 @@ function loadProfile() {
     if (profile.yearsExperience && stats[2]) {
         stats[2].setAttribute('data-target', profile.yearsExperience);
     }
-}
-
-// ===== Load Skills =====
-function loadSkills() {
-    const skills = portfolioData.skills;
-    
-    console.log('Loading skills:', skills);
-    
-    // Skill icons mapping with Font Awesome classes
-    const skillIcons = {
-        'AWS': 'fab fa-aws',
-        'Azure': 'fab fa-microsoft',
-        'Docker': 'fab fa-docker',
-        'Git': 'fab fa-git-alt',
-        'CI/CD': 'fas fa-sync-alt',
-        'HTML': 'fab fa-html5',
-        'CSS': 'fab fa-css3-alt',
-        'JavaScript': 'fab fa-js',
-        'Java': 'fab fa-java',
-        'Spring Boot': 'fas fa-leaf',
-        'Python': 'fab fa-python'
-    };
-    
-    // Helper function to create skill HTML
-    const createSkillHTML = (skill) => `
-        <div class="skill-item">
-            <i class="${skillIcons[skill] || 'fas fa-code'}"></i>
-            <span>${skill}</span>
-        </div>
-    `;
-    
-    // Load Cloud skills
-    const cloudContainer = document.getElementById('cloudSkills');
-    if (cloudContainer && skills.cloud) {
-        cloudContainer.innerHTML = skills.cloud.map(createSkillHTML).join('');
-    }
-    
-    // Load DevOps skills
-    const devopsContainer = document.getElementById('devopsSkills');
-    if (devopsContainer && skills.devops) {
-        devopsContainer.innerHTML = skills.devops.map(createSkillHTML).join('');
-    }
-    
-    // Load Frontend skills
-    const frontendContainer = document.getElementById('frontendSkills');
-    if (frontendContainer && skills.frontend) {
-        frontendContainer.innerHTML = skills.frontend.map(createSkillHTML).join('');
-    }
-    
-    // Load Backend skills
-    const backendContainer = document.getElementById('backendSkills');
-    if (backendContainer && skills.backend) {
-        backendContainer.innerHTML = skills.backend.map(createSkillHTML).join('');
-    }
-    
-    // Load Languages skills
-    const languagesContainer = document.getElementById('languagesSkills');
-    if (languagesContainer && skills.languages) {
-        languagesContainer.innerHTML = skills.languages.map(createSkillHTML).join('');
-    }
-    
-    console.log('Skills loaded successfully');
 }
 
 // ===== Load Projects =====
@@ -636,6 +574,65 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // Note: GSAP handles scroll animations - old manual animations removed
+
+// ===== Load Skills with Icons =====
+function loadSkills() {
+    const skills = portfolioData.skills;
+    
+    // Skill icon mapping
+    const skillIcons = {
+        'Azure': 'fab fa-microsoft',
+        'AWS': 'fab fa-aws',
+        'JavaScript': 'fab fa-js',
+        'HTML': 'fab fa-html5',
+        'Java': 'fab fa-java',
+        'Spring Boot': 'fas fa-leaf',
+        'Python': 'fab fa-python',
+        'C': 'fas fa-copyright',
+        'Docker': 'fab fa-docker',
+        'Git': 'fab fa-git-alt'
+    };
+    
+    // Helper to create skill HTML with icon
+    const createSkillHTML = (skill) => `
+        <span class="skill-tag">
+            <i class="${skillIcons[skill] || 'fas fa-code'}"></i>
+            ${skill}
+        </span>
+    `;
+    
+    // Load Cloud skills
+    const cloudContainer = document.getElementById('cloudSkills');
+    if (cloudContainer && skills.cloud) {
+        cloudContainer.innerHTML = skills.cloud.map(createSkillHTML).join('');
+    }
+    
+    // Load Frontend skills
+    const frontendContainer = document.getElementById('frontendSkills');
+    if (frontendContainer && skills.frontend) {
+        frontendContainer.innerHTML = skills.frontend.map(createSkillHTML).join('');
+    }
+    
+    // Load Backend skills
+    const backendContainer = document.getElementById('backendSkills');
+    if (backendContainer && skills.backend) {
+        backendContainer.innerHTML = skills.backend.map(createSkillHTML).join('');
+    }
+    
+    // Load Languages skills
+    const languagesContainer = document.getElementById('languagesSkills');
+    if (languagesContainer && skills.languages) {
+        languagesContainer.innerHTML = skills.languages.map(createSkillHTML).join('');
+    }
+    
+    // Load Tools skills
+    const toolsContainer = document.getElementById('toolsSkills');
+    if (toolsContainer && skills.tools) {
+        toolsContainer.innerHTML = skills.tools.map(createSkillHTML).join('');
+    }
+    
+    console.log('✅ Skills loaded with icons');
+}
 
 // ===== Initialize Portfolio =====
 document.addEventListener('DOMContentLoaded', () => {

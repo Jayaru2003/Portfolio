@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jayaru Manilka - Full Stack Developer</title>
     <meta name="description" content="Full Stack Developer creating exceptional digital experiences">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css?v=5">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- GSAP Library -->
@@ -60,8 +60,8 @@
                         I build exceptional digital experiences that make people's lives easier.
                     </p>
                     <div class="hero-buttons">
-                        <a href="#projects" class="btn btn-primary">
-                            <i class="fas fa-briefcase"></i> View My Work
+                        <a href="#skills" class="btn btn-primary">
+                            <i class="fas fa-code"></i> My Skills
                         </a>
                         <a href="#contact" class="btn btn-secondary">
                             <i class="fas fa-envelope"></i> Get In Touch
@@ -124,7 +124,7 @@
                 <div class="about-image">
                     <div class="profile-img">
                         <div class="about-img-wrapper">
-                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop" alt="Profile">
+                            <img src="" alt="Profile" style="opacity: 0; transition: opacity 0.3s ease;">
                             <div class="about-img-overlay"></div>
                         </div>
                     </div>
@@ -182,48 +182,54 @@
             </div>
             <div class="skills-grid">
                 <div class="skill-category">
-                    <div class="category-header">
+                    <div class="category-icon">
                         <i class="fas fa-cloud"></i>
-                        <h3>Cloud</h3>
                     </div>
-                    <div class="skill-items" id="cloudSkills">
-                        <!-- Skills will be loaded dynamically -->
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <div class="category-header">
-                        <i class="fas fa-cogs"></i>
-                        <h3>DevOps</h3>
-                    </div>
-                    <div class="skill-items" id="devopsSkills">
-                        <!-- Skills will be loaded dynamically -->
+                    <h3>Cloud</h3>
+                    <div class="skills-list">
+                        <span class="skill-tag"><i class="fab fa-microsoft"></i> Azure</span>
+                        <span class="skill-tag"><i class="fab fa-aws"></i> AWS</span>
                     </div>
                 </div>
                 <div class="skill-category">
-                    <div class="category-header">
+                    <div class="category-icon">
                         <i class="fas fa-code"></i>
-                        <h3>Frontend</h3>
                     </div>
-                    <div class="skill-items" id="frontendSkills">
-                        <!-- Skills will be loaded dynamically -->
+                    <h3>Frontend</h3>
+                    <div class="skills-list">
+                        <span class="skill-tag"><i class="fab fa-js"></i> JavaScript</span>
+                        <span class="skill-tag"><i class="fab fa-html5"></i> HTML</span>
                     </div>
                 </div>
                 <div class="skill-category">
-                    <div class="category-header">
+                    <div class="category-icon">
                         <i class="fas fa-server"></i>
-                        <h3>Backend</h3>
                     </div>
-                    <div class="skill-items" id="backendSkills">
-                        <!-- Skills will be loaded dynamically -->
+                    <h3>Backend</h3>
+                    <div class="skills-list">
+                        <span class="skill-tag"><i class="fab fa-java"></i> Java</span>
+                        <span class="skill-tag"><i class="fas fa-leaf"></i> Spring Boot</span>
                     </div>
                 </div>
                 <div class="skill-category">
-                    <div class="category-header">
+                    <div class="category-icon">
                         <i class="fas fa-laptop-code"></i>
-                        <h3>Languages</h3>
                     </div>
-                    <div class="skill-items" id="languagesSkills">
-                        <!-- Skills will be loaded dynamically -->
+                    <h3>Languages</h3>
+                    <div class="skills-list">
+                        <span class="skill-tag"><i class="fab fa-java"></i> Java</span>
+                        <span class="skill-tag"><i class="fab fa-python"></i> Python</span>
+                        <span class="skill-tag"><i class="fas fa-code"></i> C</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <div class="category-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>Tools</h3>
+                    <div class="skills-list">
+                        <span class="skill-tag"><i class="fab fa-docker"></i> Docker</span>
+                        <span class="skill-tag"><i class="fab fa-git-alt"></i> Git</span>
                     </div>
                 </div>
             </div>
@@ -338,6 +344,6 @@
         <i class="fas fa-arrow-up"></i>
     </button>
 
-    <script type="module" src="js/script.js"></script>
+    <script type="module" src="js/script.js?v=4"></script>
 </body>
 </html>

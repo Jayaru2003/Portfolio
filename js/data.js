@@ -79,11 +79,11 @@ const portfolioData = {
 
     // Skills
     skills: {
-        cloud: ["AWS", "Azure"],
-        devops: ["Docker", "Git", "CI/CD"],
-        frontend: ["HTML", "CSS", "JavaScript"],
+        cloud: ["Azure", "AWS"],
+        frontend: ["JavaScript", "HTML"],
         backend: ["Java", "Spring Boot"],
-        languages: ["Python", "Java"]
+        languages: ["Java", "Python", "C"],
+        tools: ["Docker", "Git"]
     }
 };
 
