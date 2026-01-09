@@ -460,6 +460,7 @@ section {
 .profile-img {
     position: relative;
     max-width: 500px;
+    max-height: 500px;
     margin: -250px auto 0;
 }
 

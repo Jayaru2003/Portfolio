@@ -5,7 +5,7 @@ const portfolioData = {
         fullName: "Jayaru Manilka",
         title: "Cloud Engineer & Problem Solver",
         bio: "I build exceptional digital experiences that make people's lives easier.",
-        aboutDescription: "I'm a full-stack developer with a passion for creating beautiful, functional, and user-centered digital experiences. With expertise in modern web technologies, I bring ideas to life through clean code and creative problem-solving.",
+        aboutDescription: "I am a Cloud Engineer and Frontend Developer with hands-on experience across AWS, Azure, and Google Cloud Platform (GCP). I specialize in designing, deploying, and managing scalable cloud infrastructure while building responsive and user-friendly frontend applications.I have practical experience with DevOps tools and practices, including Docker for containerization, CI/CD pipelines for automated builds and deployments, and Terraform for Infrastructure as Code (IaC). I enjoy automating workflows, optimizing cloud resources, and ensuring reliable, secure deployments from development to production.By combining cloud engineering, DevOps, and frontend development, I focus on delivering high-performance, scalable, and visually polished applications",
         profileImageUrl: "https://i.imgur.com/gWjOIlK.jpeg",
         cvUrl: "#", // Link to your CV/Resume
         emailAddress: "jayarumanilka@gmail.com",
