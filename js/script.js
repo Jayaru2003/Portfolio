@@ -363,7 +363,11 @@ function loadProfile() {
     if (profile.profileImageUrl) {
         const profileImg = document.querySelector('.profile-img img');
         if (profileImg) {
-            profileImg.src = profile.profileImageUrl;
+            // Add cache-busting parameter to force reload
+            const imageUrl = profile.profileImageUrl.includes('?') 
+                ? `${profile.profileImageUrl}&t=${Date.now()}`
+                : `${profile.profileImageUrl}?t=${Date.now()}`;
+            profileImg.src = imageUrl;
         }
     }
     
@@ -381,11 +385,8 @@ function loadProfile() {
     if (profile.linkedinUrl && socialLinks[1]) {
         socialLinks[1].href = profile.linkedinUrl;
     }
-    if (profile.twitterUrl && socialLinks[2]) {
-        socialLinks[2].href = profile.twitterUrl;
-    }
-    if (profile.emailAddress && socialLinks[3]) {
-        socialLinks[3].href = `mailto:${profile.emailAddress}`;
+    if (profile.emailAddress && socialLinks[2]) {
+        socialLinks[2].href = `mailto:${profile.emailAddress}`;
     }
     
     // Update contact section email and phone
@@ -416,11 +417,8 @@ function loadProfile() {
     if (profile.linkedinUrl && contactSocialLinks[1]) {
         contactSocialLinks[1].href = profile.linkedinUrl;
     }
-    if (profile.twitterUrl && contactSocialLinks[2]) {
-        contactSocialLinks[2].href = profile.twitterUrl;
-    }
-    if (profile.instagramUrl && contactSocialLinks[3]) {
-        contactSocialLinks[3].href = profile.instagramUrl;
+    if (profile.instagramUrl && contactSocialLinks[2]) {
+        contactSocialLinks[2].href = profile.instagramUrl;
     }
     
     // Update stats in about section

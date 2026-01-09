@@ -6,15 +6,14 @@ const portfolioData = {
         title: "Cloud Engineer & Problem Solver",
         bio: "I build exceptional digital experiences that make people's lives easier.",
         aboutDescription: "I'm a full-stack developer with a passion for creating beautiful, functional, and user-centered digital experiences. With expertise in modern web technologies, I bring ideas to life through clean code and creative problem-solving.",
-        profileImageUrl: "https://scontent.fcmb8-1.fna.fbcdn.net/v/t39.30808-6/549667552_643670785463645_5909885011579836890_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=9218jlRKuEgQ7kNvwF6m9WE&_nc_oc=Adk5N9LcMZD8Xs7Aql8aO0tcTEEHW7zeFQungdDHCDWNKgWWNGwAbp_REhC876g6uXLjAyXti3sLpIQABmhnagHv&_nc_zt=23&_nc_ht=scontent.fcmb8-1.fna&_nc_gid=TsqCg_9W7OSonpRg5IWpgQ&oh=00_AfpBrgjGnh9strhxC_O9RTnM0GTkYRWnirOez6VfPmD_4w&oe=69669C44",
+        profileImageUrl: "https://i.imgur.com/gWjOIlK.jpeg",
         cvUrl: "#", // Link to your CV/Resume
         emailAddress: "jayarumanilka@gmail.com",
         phoneNumber: "+94 70 679 6634",
         location: "268/C, Polhenawatta, Gonamulla, Galle, Sri Lanka",
-        githubUrl: "https://github.com/jayarumanilka",
-        linkedinUrl: "https://linkedin.com/in/jayarumanilka",
-        //twitterUrl: "https://twitter.com/jayarumanilka",
-        instagramUrl: "https://instagram.com/jayarumanilka",
+        githubUrl: "https://github.com/Jayaru2003",
+        linkedinUrl: "https://www.linkedin.com/in/jayaru-manilka-85b3192aa",
+        instagramUrl: "https://www.instagram.com/jaya_ru/",
         projectsCompleted: 3,
         happyClients: 0,
         yearsExperience: 0
@@ -26,7 +25,7 @@ const portfolioData = {
             id: 1,
             title: "E-Commerce Platform",
             description: "A full-featured e-commerce platform with payment integration, user authentication, and admin dashboard.",
-            imageUrl: "https://images.unsplash.com/photo-1557821552-17105176677c?w=400&h=250&fit=crop",
+            imageUrl: "https://scontent.fcmb8-1.fna.fbcdn.net/v/t39.30808-6/473138175_1161042758725521_7927222271157846283_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=a5f93a&_nc_ohc=fQBQ0wWFGfYQ7kNvwFyMCXb&_nc_oc=Adnp41INJrriTHeuOFYhvkoGY-QFb3MoKwEqp4oKAhcwxlQ2kIkp9MXJvvzbe90gPozR8_ga_oMrQQuHbWh222Xx&_nc_zt=23&_nc_ht=scontent.fcmb8-1.fna&_nc_gid=Q-3pM8Z9oL4RsLbMA7_Ybg&oh=00_Afqhddb7QkD7UDYbkk1SPIFh9MJRa5zOIcQ_3BhAuJvMIg&oe=696694CC",
             techStack: "React, Node.js, MongoDB, Stripe",
             githubUrl: "https://github.com/yourusername/project1",
             demoUrl: "https://demo-project1.com"
