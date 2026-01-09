@@ -48,12 +48,19 @@ function initGSAPAnimations() {
     });
 
     gsap.from('.social-links .social-link', {
-        duration: 0.6,
+        duration: 0.5,
         y: 20,
         opacity: 0,
         stagger: 0.1,
         ease: 'power3.out',
-        delay: 1
+        delay: 1,
+        onComplete: function() {
+            const socialLinks = document.querySelectorAll('.social-links .social-link');
+            socialLinks.forEach(link => {
+                link.style.opacity = '1';
+                link.style.visibility = 'visible';
+            });
+        }
     });
 
     gsap.from('.floating-card', {
@@ -134,14 +141,22 @@ function initGSAPAnimations() {
     gsap.from('.project-card', {
         scrollTrigger: {
             trigger: '.projects-grid',
-            start: 'top 70%',
-            toggleActions: 'play none none reverse'
+            start: 'top 80%',
+            toggleActions: 'play none none none',
+            once: true
         },
-        duration: 0.8,
-        y: 100,
+        duration: 0.6,
+        y: 50,
         opacity: 0,
         stagger: 0.15,
-        ease: 'power3.out'
+        ease: 'power3.out',
+        onComplete: function() {
+            const projectCards = document.querySelectorAll('.project-card');
+            projectCards.forEach(card => {
+                card.style.opacity = '1';
+                card.style.visibility = 'visible';
+            });
+        }
     });
 
     // Animate contact section
