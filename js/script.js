@@ -421,6 +421,18 @@ function loadProfile() {
         contactSocialLinks[2].href = profile.instagramUrl;
     }
     
+    // Update about section social links
+    const aboutSocialLinks = document.querySelectorAll('.about-social-link');
+    if (profile.githubUrl && aboutSocialLinks[0]) {
+        aboutSocialLinks[0].href = profile.githubUrl;
+    }
+    if (profile.linkedinUrl && aboutSocialLinks[1]) {
+        aboutSocialLinks[1].href = profile.linkedinUrl;
+    }
+    if (profile.instagramUrl && aboutSocialLinks[2]) {
+        aboutSocialLinks[2].href = profile.instagramUrl;
+    }
+    
     // Update stats in about section
     const stats = document.querySelectorAll('.about-stats .stat .counter');
     if (profile.projectsCompleted && stats[0]) {
