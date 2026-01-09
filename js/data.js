@@ -79,9 +79,11 @@ const portfolioData = {
 
     // Skills
     skills: {
-        frontend: ["HTML5", "CSS3", "JavaScript", "React", "Vue.js", "Tailwind CSS"],
-        backend: ["Node.js", "Express", "Python", "Java", "Spring Boot", "MongoDB"],
-        tools: ["Git", "Docker", "AWS", "VS Code", "Figma", "REST APIs"]
+        cloud: ["AWS", "Azure"],
+        devops: ["Docker", "Git", "CI/CD"],
+        frontend: ["HTML", "CSS", "JavaScript"],
+        backend: ["Java", "Spring Boot"],
+        languages: ["Python", "Java"]
     }
 };
 

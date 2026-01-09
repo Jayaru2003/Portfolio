@@ -446,6 +446,68 @@ function loadProfile() {
     }
 }
 
+// ===== Load Skills =====
+function loadSkills() {
+    const skills = portfolioData.skills;
+    
+    console.log('Loading skills:', skills);
+    
+    // Skill icons mapping with Font Awesome classes
+    const skillIcons = {
+        'AWS': 'fab fa-aws',
+        'Azure': 'fab fa-microsoft',
+        'Docker': 'fab fa-docker',
+        'Git': 'fab fa-git-alt',
+        'CI/CD': 'fas fa-sync-alt',
+        'HTML': 'fab fa-html5',
+        'CSS': 'fab fa-css3-alt',
+        'JavaScript': 'fab fa-js',
+        'Java': 'fab fa-java',
+        'Spring Boot': 'fas fa-leaf',
+        'Python': 'fab fa-python'
+    };
+    
+    // Helper function to create skill HTML
+    const createSkillHTML = (skill) => `
+        <div class="skill-item">
+            <i class="${skillIcons[skill] || 'fas fa-code'}"></i>
+            <span>${skill}</span>
+        </div>
+    `;
+    
+    // Load Cloud skills
+    const cloudContainer = document.getElementById('cloudSkills');
+    if (cloudContainer && skills.cloud) {
+        cloudContainer.innerHTML = skills.cloud.map(createSkillHTML).join('');
+    }
+    
+    // Load DevOps skills
+    const devopsContainer = document.getElementById('devopsSkills');
+    if (devopsContainer && skills.devops) {
+        devopsContainer.innerHTML = skills.devops.map(createSkillHTML).join('');
+    }
+    
+    // Load Frontend skills
+    const frontendContainer = document.getElementById('frontendSkills');
+    if (frontendContainer && skills.frontend) {
+        frontendContainer.innerHTML = skills.frontend.map(createSkillHTML).join('');
+    }
+    
+    // Load Backend skills
+    const backendContainer = document.getElementById('backendSkills');
+    if (backendContainer && skills.backend) {
+        backendContainer.innerHTML = skills.backend.map(createSkillHTML).join('');
+    }
+    
+    // Load Languages skills
+    const languagesContainer = document.getElementById('languagesSkills');
+    if (languagesContainer && skills.languages) {
+        languagesContainer.innerHTML = skills.languages.map(createSkillHTML).join('');
+    }
+    
+    console.log('Skills loaded successfully');
+}
+
 // ===== Load Projects =====
 function loadProjects() {
     const projectsGrid = document.getElementById('projectsGrid');
@@ -578,6 +640,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // ===== Initialize Portfolio =====
 document.addEventListener('DOMContentLoaded', () => {
     loadProfile();
+    loadSkills();
     loadProjects();
     
     // Initialize GSAP animations after a short delay to ensure DOM is ready
