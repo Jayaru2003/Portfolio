@@ -28,7 +28,7 @@ const portfolioData = {
             imageUrl: "https://raw.githubusercontent.com/Jayaru2003/images/refs/heads/main/WhatsApp%20Image%202026-01-09%20at%205.53.51%20PM.jpeg",
             techStack: "Lex,Yacc,Java Spring Boot",
             githubUrl: "https://github.com/Jayaru2003/testlang-compiler",
-            demoUrl: "https://demo-project1.com"
+           // demoUrl: "https://demo-project1.com"
         },
      
         

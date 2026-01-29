@@ -504,6 +504,11 @@ function loadProjects() {
 }
 
 // ===== Contact Form =====
+// Initialize EmailJS with your public key
+(function() {
+    emailjs.init("I05yosMVfcFPJsYw-");
+})();
+
 const contactForm = document.getElementById('contactForm');
 const formMessage = document.getElementById('formMessage');
 
@@ -522,16 +527,38 @@ contactForm?.addEventListener('submit', async (e) => {
     submitBtn.disabled = true;
     submitBtn.querySelector('.btn-text').textContent = 'Sending...';
     
-    // Simulate form submission (since we don't have a backend)
-    setTimeout(() => {
+    try {
+        // Send email to jayarumanilka@gmail.com using EmailJS
+        const response = await emailjs.send(
+            'Jayaru2003',
+            'template_m1y55x9',
+            {
+                from_name: formData.name,
+                from_email: formData.email,
+                message: formData.message,
+                name: formData.name,
+                email: formData.email
+            }
+        );
+        
+        console.log('✅ Email sent successfully:', response);
+        
         // Show success message
         formMessage.className = 'form-message success';
         formMessage.style.display = 'block';
-        formMessage.innerHTML = '<i class="fas fa-check-circle"></i> Thank you! Your message has been received. (Note: This is a demo - no actual email sent)';
+        formMessage.innerHTML = '<i class="fas fa-check-circle"></i> Thank you! Your message has been sent successfully!';
         
         // Reset form
         contactForm.reset();
         
+    } catch (error) {
+        console.error('❌ Email send failed:', error);
+        
+        // Show error message
+        formMessage.className = 'form-message error';
+        formMessage.style.display = 'block';
+        formMessage.innerHTML = '<i class="fas fa-exclamation-circle"></i> Oops! Something went wrong. Please email me directly at jayarumanilka@gmail.com';
+    } finally {
         // Re-enable button
         submitBtn.disabled = false;
         submitBtn.querySelector('.btn-text').textContent = originalText;
@@ -540,15 +567,7 @@ contactForm?.addEventListener('submit', async (e) => {
         setTimeout(() => {
             formMessage.style.display = 'none';
         }, 5000);
-        
-        // In a real application, you would integrate with a service like:
-        // - Formspree (https://formspree.io/)
-        // - EmailJS (https://www.emailjs.com/)
-        // - Netlify Forms (https://www.netlify.com/products/forms/)
-        // - Or your own serverless function
-        
-        console.log('Form submission:', formData);
-    }, 1000);
+    }
 });
 
 // ===== Back to Top Button =====

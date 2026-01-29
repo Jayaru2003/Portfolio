@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Email Test</title>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <style>
+        body { font-family: Arial; padding: 40px; }
+        button { padding: 15px 30px; font-size: 18px; cursor: pointer; background: #6366f1; color: white; border: none; border-radius: 8px; }
+        #result { margin-top: 20px; padding: 20px; border-radius: 8px; }
+        .success { background: #d1fae5; color: #065f46; }
+        .error { background: #fee2e2; color: #991b1b; }
+    </style>
+</head>
+<body>
+    <h1>EmailJS Test Page</h1>
+    <p>Click the button to send a test email to jayarumanilka@gmail.com</p>
+    
+    <button onclick="testEmail()">Send Test Email</button>
+    <div id="result"></div>
+
+    <script>
+        // Initialize EmailJS
+        emailjs.init("I05yosMVfcFPJsYw-");
+
+        async function testEmail() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '⏳ Sending...';
+            resultDiv.className = '';
+            
+            try {
+                const response = await emailjs.send(
+                    'Jayaru2003',
+                    'template_m1y55x9',
+                    {
+                        from_name: 'Test User',
+                        from_email: 'test@example.com',
+                        message: 'This is a test message from the test page!',
+                        name: 'Test User',
+                        email: 'test@example.com'
+                    }
+                );
+                
+                resultDiv.innerHTML = '✅ SUCCESS! Email sent!<br><br>Check jayarumanilka@gmail.com inbox!<br><br>Response: ' + JSON.stringify(response);
+                resultDiv.className = 'success';
+                console.log('Success:', response);
+            } catch (error) {
+                resultDiv.innerHTML = '❌ FAILED!<br><br>Error: ' + (error.text || error.message || JSON.stringify(error));
+                resultDiv.className = 'error';
+                console.error('Error:', error);
+            }
+        }
+    </script>
+</body>
+</html>
