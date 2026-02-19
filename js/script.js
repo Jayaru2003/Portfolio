@@ -475,8 +475,8 @@ function loadProjects() {
         return;
     }
     
-    projectsGrid.innerHTML = projects.map(project => `
-        <div class="project-card">
+    projectsGrid.innerHTML = projects.map((project, index) => `
+        <div class="project-card" data-project-index="${index}" style="cursor: pointer;">
             <img src="${project.imageUrl || 'https://via.placeholder.com/400x250'}" 
                  alt="${project.title}" 
                  class="project-image">
@@ -490,18 +490,90 @@ function loadProjects() {
                 </div>
                 <div class="project-links">
                     ${project.githubUrl ? 
-                        `<a href="${project.githubUrl}" target="_blank" rel="noopener noreferrer" class="project-link github">
+                        `<a href="${project.githubUrl}" target="_blank" rel="noopener noreferrer" class="project-link github" onclick="event.stopPropagation();">
                             <i class="fab fa-github"></i> Code
                         </a>` : ''}
                     ${project.demoUrl ? 
-                        `<a href="${project.demoUrl}" target="_blank" rel="noopener noreferrer" class="project-link demo">
+                        `<a href="${project.demoUrl}" target="_blank" rel="noopener noreferrer" class="project-link demo" onclick="event.stopPropagation();">
                             <i class="fas fa-external-link-alt"></i> Live Demo
                         </a>` : ''}
                 </div>
             </div>
         </div>
     `).join('');
+    
+    // Add click event to project cards for modal
+    document.querySelectorAll('.project-card').forEach(card => {
+        card.addEventListener('click', () => {
+            const index = card.dataset.projectIndex;
+            openProjectModal(projects[index]);
+        });
+    });
 }
+
+// ===== Project Modal Functions =====
+function openProjectModal(project) {
+    const modal = document.getElementById('projectModal');
+    const modalImage = document.getElementById('modalImage');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDescription = document.getElementById('modalDescription');
+    const modalTech = document.getElementById('modalTech');
+    const modalLinks = document.getElementById('modalLinks');
+    
+    modalImage.src = project.imageUrl || 'https://via.placeholder.com/400x250';
+    modalImage.alt = project.title;
+    modalTitle.textContent = project.title;
+    modalDescription.textContent = project.description || 'No description available';
+    
+    modalTech.innerHTML = project.techStack ? project.techStack.split(',').map(tech => 
+        `<span class="tech-tag">${tech.trim()}</span>`
+    ).join('') : '';
+    
+    modalLinks.innerHTML = `
+        ${project.githubUrl ? 
+            `<a href="${project.githubUrl}" target="_blank" rel="noopener noreferrer" class="project-link github">
+                <i class="fab fa-github"></i> View Code
+            </a>` : ''}
+        ${project.demoUrl ? 
+            `<a href="${project.demoUrl}" target="_blank" rel="noopener noreferrer" class="project-link demo">
+                <i class="fas fa-external-link-alt"></i> Live Demo
+            </a>` : ''}
+    `;
+    
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeProjectModal() {
+    const modal = document.getElementById('projectModal');
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+// Modal event listeners
+document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('projectModal');
+    const closeBtn = document.querySelector('.modal-close');
+    
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeProjectModal);
+    }
+    
+    if (modal) {
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeProjectModal();
+            }
+        });
+    }
+    
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeProjectModal();
+        }
+    });
+});
 
 // ===== Contact Form =====
 // Initialize EmailJS with your public key

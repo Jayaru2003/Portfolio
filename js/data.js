@@ -31,7 +31,15 @@ const portfolioData = {
            // demoUrl: "https://demo-project1.com"
         },
      
-        
+     {
+            id: 2,
+            title: "Cloth-Heavan E-commerce Website",
+            description: "Cloth Haven is a modern full-stack e-commerce application built using Spring Boot for the backend and React + TypeScript for the frontend. The platform includes secure user authentication, profile management, a responsive UI, and a fully structured REST API connected to a MySQL database. Core e-commerce features such as product management, shopping cart, order processing, and payments are currently in development.",
+            imageUrl: "https://raw.githubusercontent.com/Jayaru2003/images/refs/heads/main/WhatsApp%20Image%202026-01-09%20at%205.53.51%20PM.jpeg",
+            techStack: "Java,spring boot,HTML,CSS,JavaScript,react",
+            githubUrl: "https://github.com/Jayaru2003/Cloth-Haven.git",
+            demoUrl: "https://drive.google.com/file/d/1ciE72vGYggRwao9NxhAWwWi5lW4zZrIM/view?usp=drivesdk"
+        },    
     ],
 
     // Skills
