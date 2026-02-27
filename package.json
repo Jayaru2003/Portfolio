@@ -4,8 +4,8 @@
   "description": "A modern serverless portfolio website",
   "main": "index.html",
   "scripts": {
-    "start": "python -m http.server 8000",
-    "dev": "python -m http.server 8000",
+    "start": "serve",
+    "dev": "serve",
     "deploy:vercel": "vercel",
     "deploy:netlify": "netlify deploy --prod"
   },
@@ -16,5 +16,8 @@
     "frontend"
   ],
   "author": "Your Name",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.2.5"
+  }
 }
